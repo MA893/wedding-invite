@@ -1,0 +1,1299 @@
+:root {
+    --primary: #650009;
+    --primary-dark: #6f2e40;
+    --gold: #d9bd75;
+    --white: #f8f1ec;
+}
+
+@font-face {
+    font-family: 'WeddingScript';
+    src: url('./assets/WeddingFont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html,
+body,
+button,
+input,
+select,
+textarea {
+    font-family: 'EB Garamond', serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'EB Garamond', serif;
+    overflow-x: hidden;
+
+    background: #f4efe7;
+}
+
+.change-lang-btn {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 1000;
+
+    padding: 10px 16px;
+    border: 1px solid white;
+    border-radius: 999px;
+
+    background: rgba(140, 59, 81, 0.8);
+    color: white;
+
+    font-family: 'EB Garamond', serif;
+    cursor: pointer;
+}
+
+.ky-title {
+    display: none;
+
+    font-family: 'EB Garamond', serif;
+
+    font-style: italic;
+    font-weight: 400;
+
+    font-size: clamp(30px, 7vw, 92px);
+
+    line-height: 0.9;
+
+    letter-spacing: 1px;
+
+    text-align: center;
+    color: white;
+}
+
+/* выбор языка */
+
+.language-modal {
+    position: fixed;
+    inset: 0;
+    background: var(--primary);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.language-content {
+    text-align: center;
+    color: white;
+    width: min(90%, 430px);
+}
+
+.language-content h2 {
+    font-weight: 300;
+    letter-spacing: 2px;
+    font-size: clamp(26px, 5vw, 40px);
+    margin-bottom: 38px;
+}
+
+.language-content button {
+    width: 100%;
+    max-width: 330px;
+    display: block;
+    margin: 20px auto;
+    padding: 18px 24px;
+    border: none;
+    border-radius: 999px;
+    background: #eee;
+    color: var(--primary);
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(22px, 4vw, 30px);
+    cursor: pointer;
+}
+
+/* экран конверта */
+
+.letter-screen {
+    min-height: 100vh;
+    background: var(--primary);
+    position: relative;
+    overflow: hidden;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 45px 18px 55px;
+}
+
+.letter-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.rhombus {
+    position: absolute;
+    left: 50%;
+
+    width: min(105vw, 850px);
+    height: min(105vw, 850px);
+
+    background: var(--primary);
+
+    transform: translateX(-50%) rotate(45deg);
+
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.35);
+
+    transition:
+            top 3s cubic-bezier(0.22, 1, 0.36, 1),
+            bottom 3s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 2.4s ease;
+}
+
+.rhombus-top {
+    top: -420px;
+    z-index: 2;
+}
+
+.rhombus-bottom {
+    bottom: -420px;
+}
+
+.rhombus::after {
+    content: "";
+    position: absolute;
+    inset: -7px;
+    border: 6px solid var(--gold);
+}
+
+.letter-text {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    max-width: 420px;
+
+    transition:
+            transform 3s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 2.4s ease;
+}
+
+.letter-screen.open .top-text {
+    transform: translateY(-500px);
+    opacity: 0;
+}
+
+.letter-screen.open .bottom-text {
+    transform: translateY(500px);
+    opacity: 0;
+}
+
+body.lang-ru .top-text {
+    margin-top: 120px;
+}
+
+body.lang-ru .top-text img {
+    width: clamp(230px, 45vw, 380px);
+    display: block;
+    margin: 0 auto;
+    position: static;
+}
+
+
+.bottom-text {
+    margin-bottom: 150px;
+    max-width: 360px;
+}
+
+.bottom-text p {
+    font-size: clamp(17px, 3.8vw, 21px);
+    line-height: 1.18;
+    max-width: 340px;
+}
+
+.seal-btn {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    z-index: 10;
+
+    transform: translate(-50%, -50%);
+
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    pointer-events: auto;
+
+    transition:
+            opacity 0.8s ease,
+            transform 0.8s ease;
+}
+
+.seal-btn img {
+    width: clamp(170px, 22vw, 230px);
+    display: block;
+}
+
+/* открытие */
+
+.letter-wrapper.open .rhombus-top {
+    top: -1100px;
+    opacity: 0;
+}
+
+.letter-wrapper.open .rhombus-bottom {
+    bottom: -1100px;
+    opacity: 0;
+}
+
+.letter-wrapper.open .seal-btn {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.65);
+}
+
+/* главный экран */
+
+.main-content {
+    min-height: 100vh;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+.title-card-content,
+.couple-names,
+.main-description,
+.wedding-date {
+    color: white;
+}
+
+.title-card {
+    position: relative;
+
+    width: min(100%, 450px);
+    aspect-ratio: 280 / 570;
+}
+
+
+.main-icon {
+    display: block;
+
+    width: 80px;
+
+    margin: 0 auto 25px;
+}
+
+/*анимация main*/
+
+/* плавное появление главного экрана */
+.main-content.show {
+    display: flex;
+    animation: mainFadeIn 1s ease forwards;
+}
+
+.title-card {
+    opacity: 0;
+    transform: translateY(35px) scale(0.96);
+}
+
+.main-content.show .title-card {
+    animation: cardShow 1.2s ease forwards;
+}
+
+/* поочередное появление элементов */
+.main-icon,
+.couple-names,
+.main-description,
+.wedding-date {
+    opacity: 0;
+    transform: translateY(22px);
+}
+
+.main-content.show .main-icon {
+    animation: textShow 0.8s ease forwards;
+    animation-delay: 0.25s;
+}
+
+.main-content.show .couple-names {
+    animation: textShow 0.9s ease forwards;
+    animation-delay: 0.45s;
+}
+
+.main-content.show .main-description {
+    animation: textShow 0.9s ease forwards;
+    animation-delay: 0.7s;
+}
+
+.main-content.show .wedding-date {
+    animation: textShow 0.9s ease forwards;
+    animation-delay: 0.95s;
+}
+
+.second-section.active .section2-image {
+    animation-delay: 0.1s;
+}
+
+.second-section.active .section2-description {
+    animation-delay: 0.35s;
+}
+
+.second-section.active .calendar-block {
+    animation-delay: 0.6s;
+}
+
+.second-section.active .location-block {
+    animation-delay: 0.85s;
+}
+
+.location-block {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.address-title {
+    width: 270px;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.building-image {
+    width: 100%;
+    max-width: 320px;
+    display: block;
+    margin-top: -170px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.event-time {
+    font-size: 42px;
+    color: var(--primary);
+    margin-top: -120px;
+    margin-bottom: 20px;
+    font-family: 'WeddingScript', cursive;
+}
+
+.event-address {
+    margin-top: -30px;
+    font-size: 30px;
+    line-height: 1.4;
+    padding: 0 20px;
+    color: var(--primary);
+}
+
+body.lang-ru .address-title {
+    margin-top: -90px;
+}
+
+body.lang-ru .building-image{
+    margin-top: -270px;
+}
+
+@keyframes revealItem {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes mainFadeIn {
+    from {
+        opacity: 0;
+        background: #fffaf5;
+    }
+    to {
+        opacity: 1;
+        background: #f4efe7;
+    }
+}
+
+@keyframes cardShow {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes textShow {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes revealItem {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.subtitle {
+    font-size: clamp(24px, 4vw, 42px);
+}
+
+h1 {
+    font-size: clamp(72px, 13vw, 170px);
+    font-weight: 400;
+    line-height: 1;
+}
+
+.date {
+    font-size: clamp(24px, 4vw, 44px);
+}
+
+/* ===========================
+   KYRGYZ VERSION
+=========================== */
+
+body.lang-ky .top-text {
+    margin-top: 100px;
+}
+
+body.lang-ky .top-text img {
+    width: 300px;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+
+body.lang-ky .ky-title {
+    display: block;
+
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+
+    font-size: clamp(40px, 7vw, 90px);
+    line-height: 0.9;
+
+    color: #fff;
+}
+
+.title-bg {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    z-index: 1;
+}
+
+.title-card-content {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 55px 45px 45px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.couple-names {
+    font-family: 'WeddingScript', cursive;
+
+    font-size: 76px;
+    line-height: .85;
+
+    color: white;
+    text-align: center;
+
+    margin-bottom: 40px;
+}
+
+.couple-names span {
+    font-size: 30px;
+    line-height: 1;
+}
+
+.main-description {
+    font-family: 'EB Garamond', serif;
+
+    font-size: 22px;
+    line-height: 1.15;
+
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.wedding-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-family: 'WeddingScript', cursive;
+    font-size: 84px;
+
+    line-height: .9;
+}
+
+.wedding-date i {
+    width: 7px;
+    height: 7px;
+
+    background: white;
+
+    transform: rotate(45deg);
+
+    margin: 8px 0;
+
+    border-radius: 0;
+}
+
+/* кыргызский текст внутри карточки */
+
+body.lang-ky .main-description {
+    font-size: clamp(17px, 4vw, 21px);
+    line-height: 1.1;
+}
+
+.couple-names {
+    font-family: 'WeddingScript', cursive;
+}
+
+
+.second-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.reveal-item {
+    opacity: 0;
+    transition:
+            opacity 1.15s ease,
+            transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-item.visible {
+    opacity: 1;
+    transform: none;
+}
+
+.second-section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-inner {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    color: var(--primary);
+}
+
+.section2-image {
+    width: 100%;
+    max-width: 300px;
+    max-height: 170px;
+    object-fit: contain;
+
+    display: block;
+    margin: 0 auto 8px;
+}
+
+.section2-text-image {
+    width: 100%;
+    max-width: 330px;
+    display: block;
+    margin: 0 auto 30px;
+}
+
+.section2-description {
+    font-size: 22px;
+    line-height: 1.18;
+    margin-top: -10px;
+    margin-bottom: 35px;
+    padding: 0 20px;
+}
+
+body.lang-ru .section2-image {
+    max-height: 350px;
+    margin-bottom: 0;
+}
+
+body.lang-ru .section2-description {
+    margin-top: -70px;
+}
+
+.calendar-block {
+    width: 100%;
+    color: var(--primary);
+    font-family: 'EB Garamond', serif;
+    padding: 0 20px;
+}
+
+.week-days,
+.week-numbers {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    align-items: center;
+}
+
+.week-days span {
+    font-size: 22px;
+}
+
+.week-numbers {
+    margin-top: 12px;
+}
+
+.week-numbers span {
+    font-size: 22px;
+    position: relative;
+}
+
+.heart-day {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+
+    opacity: 0;
+    transform: scale(.6);
+}
+
+.reveal.active .heart-day {
+    animation: heartPop .8s ease forwards;
+    animation-delay: 1.2s;
+}
+
+.reveal.active .heart-day {
+    animation: heartPop 0.9s ease forwards;
+    animation-delay: 1.25s;
+}
+
+.location-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.location-link {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .3s ease;
+}
+
+.location-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.location-link:hover {
+    transform: translateY(-4px) scale(1.05);
+}
+
+.countdown-block {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    text-align: center;
+    background: transparent;
+    position: relative;
+}
+
+body.lang-ru .until-title {
+    width: 300px;
+    margin: -85px auto 0 auto;
+}
+
+body.lang-ru .countdown {
+    margin-top: -170px;
+}
+
+body.lang-ky .until-title {
+    width: 260px;
+    margin: 40px auto 20px;
+}
+
+body.lang-ky .countdown {
+    margin-top: -10px;
+}
+
+.countdown {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    align-items: center;
+    font-family: 'PF Monumenta Pro', 'EB Garamond', serif;
+    color: #5F0000;
+    background: transparent;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countdown-number {
+    width: 64px;
+    height: 64px;
+    border: 1px solid #5F0000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5F0000;
+    font-size: 24px;
+    line-height: 1;
+}
+
+.countdown-label {
+    margin-top: 8px;
+    color: #5F0000;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.reveal.active .program-block {
+    transition-delay: 1.2s;
+}
+
+.program-block {
+    position: relative;
+    padding: 40px 0 80px;
+    text-align: center;
+    color: var(--primary);
+    overflow: hidden;
+}
+
+.program-title {
+    display: block;
+    width: 280px;
+    max-width: 80%;
+}
+
+/* русская картинка schedule-ru.svg */
+body.lang-ru .program-title {
+    width: 300px;
+    margin: -100px auto 0 auto;
+}
+
+/* кыргызская картинка schedule.png */
+body.lang-ky .program-title {
+    width: 260px;
+    margin: 30px auto 25px auto;
+}
+
+body.lang-ru .program-timeline {
+    margin-top: -220px;
+}
+
+body.lang-ky .program-timeline {
+    margin-top: -110px;
+}
+
+.program-timeline {
+    position: relative;
+    width: 100%;
+    max-width: 430px;
+    height: 760px;
+    margin: -150px auto 0 auto;
+}
+
+.program-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 480px;
+    height: 100%;
+    transform: translateX(-50%);
+    object-fit: fill;
+    z-index: 1;
+}
+
+.heart-runner {
+    position: absolute;
+    top: 80px;
+    left: 0%;
+    width: 42px;
+    height: 42px;
+    z-index: 4;
+    transform: translateX(-50%);
+    transition: top 0.08s linear, left 0.08s linear;
+}
+
+.heart-runner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.program-item {
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--primary);
+    opacity: 0;
+    transition:
+            opacity 1.2s ease,
+            transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    text-align: center;
+}
+
+.program-item img {
+    width: 68px;
+    max-height: 78px;
+    object-fit: contain;
+}
+
+.program-item strong {
+    display: block;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.program-item p {
+    margin-top: 8px;
+    font-size: 20px;
+    line-height: 1.15;
+    text-transform: uppercase;
+}
+
+.program-item.from-left {
+    transform: translateX(-100vw);
+}
+
+.program-item.from-right {
+    transform: translateX(100vw);
+}
+
+.program-item.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+body.lang-ky .item-5{
+    left: 50px;
+}
+
+.item-1 {
+    top: 180px;
+    left: 0px;
+}
+
+.item-2 {
+    top: 265px;
+    right: 30px;
+}
+
+.item-3 {
+    top: 370px;
+    left: 45px;
+}
+
+.item-4 {
+    top: 475px;
+    right: 50px;
+}
+
+.item-5 {
+    top: 595px;
+    left: 15px;
+}
+
+@keyframes heartMove {
+    0% {
+        top: 80px;
+        left: 0%;
+    }
+
+    20% {
+        top: 170px;
+        left: 65%;
+    }
+
+    40% {
+        top: 310px;
+        left: 40%;
+    }
+
+    60% {
+        top: 380px;
+        left: 65%;
+    }
+
+    80% {
+        top: 510px;
+        left: 38%;
+    }
+
+    100% {
+        top: 640px;
+        left: 100%;
+    }
+}
+
+@keyframes heartPop {
+    0% {
+        opacity: 0;
+        transform: scale(.6);
+    }
+
+    70% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.rsvp-block {
+    padding: 40px 28px 90px;
+    color: var(--primary);
+    text-align: left;
+}
+
+body.lang-ru .rsvp-title-image {
+    margin-top: -200px;
+}
+
+body.lang-ru .rsvp-form {
+    margin-top: -180px;
+}
+.rsvp-title-image {
+    width: 330px;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto 34px;
+}
+
+.rsvp-form {
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+.rsvp-form label,
+#answerLabel {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+
+.rsvp-form input[type="text"] {
+    width: 100%;
+    height: 54px;
+    padding: 0 22px;
+    border: 1px solid var(--primary);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--primary);
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    margin-bottom: 24px;
+}
+
+.rsvp-form input::placeholder {
+    color: rgba(101, 0, 9, .45);
+}
+
+.radio-row {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    cursor: pointer;
+}
+
+.radio-row input {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary);
+}
+
+.rsvp-form button {
+    display: block;
+    min-width: 160px;
+    margin: 28px auto 0;
+    padding: 13px 30px;
+    border: none;
+    border-radius: 999px;
+    background: var(--primary);
+    color: #fff;
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
+    text-transform: lowercase;
+    cursor: pointer;
+}
+
+#rsvpMessage {
+    margin-top: 18px;
+    text-align: center;
+    color: var(--primary);
+    font-size: 18px;
+}
+
+.heart-day img {
+    position: absolute;
+    width: 58px;
+    height: 58px;
+}
+
+.heart-day b {
+    position: relative;
+    z-index: 2;
+    color: white;
+    font-weight: 400;
+    font-size: 23px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* адаптив */
+
+@media (min-width: 1025px) {
+    .rhombus-top{
+        top: -520px;
+    }
+
+    .seal-btn{
+        top: 50%;
+    }
+
+    body.lang-ky .ky-title{
+        font-size: clamp(24px, 4vw, 42px);
+    }
+
+    body.lang-ky .top-text {
+        margin-top: 90px;
+    }
+
+    body.lang-ky .top-text img{
+        left: 45px;
+        top: 40px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .rhombus-top{
+        top: -480px;
+    }
+
+    .seal-btn{
+        top: 60%;
+    }
+
+    .bottom-text{
+        margin-bottom: 80px;
+    }
+
+    body.lang-ky .top-text {
+        margin-top: 70px;
+    }
+
+    body.lang-ky .top-text img{
+        left: 45px;
+        top: 130px;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 768px) {
+    .letter-screen {
+        padding: 35px 24px;
+    }
+
+    .rhombus {
+        width: min(90vw, 850px);
+        height: min(90vw, 850px);
+    }
+
+    .rhombus-top {
+        top: -390px;
+    }
+
+    .rhombus-bottom {
+        bottom: -420px;
+    }
+
+    body.lang-ru .top-text img {
+        width: clamp(260px, 55vw, 450px);
+    }
+
+    .top-text {
+        margin-top: 190px;
+    }
+
+    .top-text img {
+        width: clamp(220px, 24vw, 310px);
+    }
+
+    .bottom-text {
+        margin-bottom: 100px;
+    }
+
+    .bottom-text p {
+        font-size: 18px;
+        line-height: 1.12;
+        max-width: 330px;
+    }
+
+    body.lang-ky .top-text {
+        margin-top: 70px;
+    }
+
+    body.lang-ky .top-text img{
+        left: 45px;
+        top: 85px;
+    }
+
+    .location-links {
+        gap: 18px;
+        margin-top: 18px;
+    }
+
+    .location-link {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+@media (max-width: 480px) {
+    .letter-screen {
+        padding-top: 50px;
+        padding-bottom: 60px;
+    }
+
+    body.lang-ky .top-text {
+        margin-top: 60px;
+    }
+
+    body.lang-ky .top-text img {
+        width: 280px;
+        position: relative;
+        left: -5px;
+        top: 0;
+        margin: 0 auto;
+    }
+
+    body.lang-ky .ky-title {
+        font-size: 35px;
+    }
+
+    body.lang-ru .top-text {
+        margin-top: 60px;
+    }
+
+    body.lang-ru .top-text img {
+        width: 450px;
+        position: absolute;
+        left: -230px;
+    }
+
+    .bottom-text {
+        margin-bottom: 70px;
+    }
+
+    .bottom-text p {
+        font-size: 19px;
+        line-height: 1.15;
+        max-width: 310px;
+    }
+
+    .rhombus {
+        width: 135vw;
+        height: 135vw;
+    }
+
+    .rhombus-top {
+        top: -190px;
+        z-index: 2;
+    }
+
+    .rhombus-bottom {
+        bottom: -110px;
+    }
+
+    .letter-wrapper.open .rhombus-top {
+        top: -700px;
+    }
+
+    .letter-wrapper.open .rhombus-bottom {
+        bottom: -700px;
+    }
+
+    .countdown {
+        gap: 10px;
+    }
+
+    .countdown-number {
+        width: 58px;
+        height: 58px;
+        font-size: 22px;
+    }
+
+    .countdown-label {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 370px) {
+    .rhombus-top{
+        top: -50px;
+    }
+}
+
+.reveal-item {
+    opacity: 0;
+    transform: translateY(45px);
+    transition:
+            opacity 1.6s ease,
+            transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-item.show {
+    opacity: 1;
+    transform: translateY(0);
+}

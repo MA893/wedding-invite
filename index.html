@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<button class="change-lang-btn" onclick="resetLanguage()">
+    Сменить язык
+</button>
+
+<div id="languageModal" class="language-modal">
+    <div class="language-content">
+        <h2>ТИЛДИ ТАНДАҢЫЗ</h2>
+        <h2>ВЫБЕРИТЕ ЯЗЫК</h2>
+
+        <button onclick="setLanguage('ky')">Кыргыз тили</button>
+        <button onclick="setLanguage('ru')">Русский язык</button>
+    </div>
+</div>
+
+<section id="letterScreen" class="letter-screen">
+    <div class="letter-text top-text">
+
+        <div id="kyTitle" class="ky-title">
+            ҮЙЛӨНҮҮ ТОЙГО
+        </div>
+
+        <img id="titleImage"
+             src="./assets/photo.svg"
+             alt="Приглашение">
+
+    </div>
+
+    <div class="letter-wrapper">
+        <div class="rhombus rhombus-top">
+        </div>
+        <div class="rhombus rhombus-bottom"></div>
+
+        <button class="seal-btn" onclick="openLetter()">
+            <img id="sealImage" src="./assets/open.png" alt="Нажмите">
+        </button>
+    </div>
+
+    <div class="letter-text bottom-text">
+        <p id="letterDescription">
+            Вы не просто так получили это приглашение! В особенный день
+            мы очень хотим, чтобы вы были рядом!
+        </p>
+    </div>
+</section>
+
+<section id="mainContent" class="main-content">
+    <div class="title-card">
+        <img src="./assets/title_bg.svg" class="title-bg" alt="bg">
+
+        <div class="title-card-content">
+            <img src="assets/main_icon.svg" class="main-icon" alt="icon">
+            <h1 class="couple-names">
+                Альмир<br>
+                <span>&</span><br>
+                Айпери
+            </h1>
+
+            <p id="mainDescription" class="main-description">
+                Спешим сообщить радостную<br>
+                новость - мы женимся!
+            </p>
+
+            <div class="wedding-date">
+                <span>18</span>
+                <i></i>
+                <span>07</span>
+                <i></i>
+                <span>26</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="secondSection" class="second-section reveal">
+    <div class="section-inner">
+        <img id="section2Image"
+             class="section2-image reveal-item"
+             src="./assets/section-2-ru-text.svg"
+             alt="section 2">
+
+        <p id="section2Description"
+           class="section2-description reveal-item">
+            Мы приглашаем вас разделить с нами радостный день, в который мы станем семьёй.
+            <br><br>
+            В этот волшебный день мы скажем друг другу «Да» и соединим сердца и судьбы в кругу близких и родных.
+        </p>
+
+        <div class="calendar-block reveal-item">
+            <div class="week-days" id="weekDays">
+                <span>Пн</span>
+                <span>Вт</span>
+                <span>Ср</span>
+                <span>Чт</span>
+                <span>Пт</span>
+                <span>Сб</span>
+                <span>Вс</span>
+            </div>
+
+            <div class="week-numbers" id="weekNumbers">
+                <span>13</span>
+                <span>14</span>
+                <span>15</span>
+                <span>16</span>
+                <span>17</span>
+
+                <span class="heart-day">
+        <img src="./assets/heart.svg" alt="">
+        <b>18</b>
+    </span>
+
+                <span>19</span>
+            </div>
+        </div>
+
+        <div class="location-block reveal-item">
+
+            <img id="addressTitle"
+                 class="address-title"
+                 src="./assets/adress-ru.svg"
+                 alt="Адрес">
+
+            <img class="building-image"
+                 src="./assets/building.svg"
+                 alt="Ресторан">
+
+            <div class="event-time">
+                17:00
+            </div>
+
+            <div id="eventAddress" class="event-address">
+                г. Бишкек, ул. 7 Апреля, 174/1<br>
+                Ресторан «Асман»
+            </div>
+
+            <div class="location-links">
+
+                <a href="https://www.instagram.com/asman_celebrityhall"
+                   target="_blank"
+                   class="location-link">
+                    <img src="./assets/insta.svg" alt="Instagram">
+                </a>
+
+                <a href="https://go.2gis.com/iwwAL"
+                   target="_blank"
+                   class="location-link">
+                    <img src="./assets/navig.svg" alt="2GIS">
+                </a>
+
+            </div>
+
+        </div>
+
+        <section class="countdown-block reveal-item">
+            <img id="untilTitle"
+                 class="until-title"
+                 src="./assets/until_ru.svg"
+                 alt="До свадьбы осталось">
+
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div id="days" class="countdown-number">00</div>
+                    <div id="daysLabel" class="countdown-label">Дней</div>
+                </div>
+
+                <div class="countdown-item">
+                    <div id="hours" class="countdown-number">00</div>
+                    <div id="hoursLabel" class="countdown-label">Часов</div>
+                </div>
+
+                <div class="countdown-item">
+                    <div id="minutes" class="countdown-number">00</div>
+                    <div id="minutesLabel" class="countdown-label">Минут</div>
+                </div>
+
+                <div class="countdown-item">
+                    <div id="seconds" class="countdown-number">00</div>
+                    <div id="secondsLabel" class="countdown-label">Секунд</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="program-block reveal-item">
+            <img id="programTitle"
+                 class="program-title"
+                 src="./assets/schedule-ru.svg"
+                 alt="Программа">
+
+            <div class="program-timeline">
+                <img class="program-line"
+                     src="./assets/line.svg"
+                     alt="">
+
+                <div class="heart-runner">
+                    <img src="./assets/line-heart.svg" alt="">
+                </div>
+
+                <div class="program-item item-1 from-left">
+                    <img src="./assets/guests.svg" alt="">
+                    <div>
+                        <strong>17:00</strong>
+                        <p id="program1">Сбор гостей</p>
+                    </div>
+                </div>
+
+                <div class="program-item item-2 from-right">
+                    <div>
+                        <strong>17:30</strong>
+                        <p id="program2">Фуршет</p>
+                    </div>
+                    <img src="./assets/start.svg" alt="">
+                </div>
+
+                <div class="program-item item-3 from-left">
+                    <img src="./assets/dinner.svg" alt="">
+                    <div>
+                        <strong>19:00</strong>
+                        <p id="program3">Банкет</p>
+                    </div>
+                </div>
+
+                <div class="program-item item-4 from-right">
+                    <div>
+                        <strong>21:00</strong>
+                        <p id="program4">Торт</p>
+                    </div>
+                    <img src="./assets/cake.svg" alt="">
+                </div>
+
+                <div class="program-item item-5 from-left">
+                    <img src="./assets/end.svg" alt="">
+                    <div>
+                        <strong>22:00</strong>
+                        <p id="program5">Завершение вечера</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="rsvp-block reveal-item">
+            <img id="rsvpTitleImage"
+                 class="rsvp-title-image"
+                 src="./assets/guests_list-ru.svg"
+                 alt="Анкета гостя">
+
+            <form id="rsvpForm" class="rsvp-form">
+                <label id="nameLabel">Ваше имя?</label>
+                <input id="guestName" type="text" placeholder="имя" required>
+
+                <p id="answerLabel">Вы придёте на той?</p>
+
+                <label class="radio-row">
+                    <input type="radio" name="guestAnswer" value="Приду" required>
+                    <span id="yesLabel">Да, приду</span>
+                </label>
+
+                <label class="radio-row">
+                    <input type="radio" name="guestAnswer" value="Не приду">
+                    <span id="noLabel">К сожалению, не смогу</span>
+                </label>
+
+                <button type="submit" id="rsvpButton">отправить</button>
+            </form>
+
+            <p id="rsvpMessage"></p>
+        </section>
+    </div>
+</section>
+
+<audio id="weddingMusic" src="./assets/music.mp3" loop></audio>
+
+<script src="script.js"></script>
+</body>
+</html>
