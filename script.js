@@ -33,10 +33,10 @@ const texts = {
         title: "./assets/title_ky.png",
 
         days: ["Дш", "Ше", "Ша", "Бш", "Жм", "Иш", "Жк"],
-        dates: ["13", "14", "15", "16", "17", "18", "19"],
+        dates: ["13", "14", "15", "16", "", "18", "19"],
         addressTitle: "./assets/adress.png",
         address:
-            "Бишкек ш., 7-Апрель көчөсү, 174/1<br>«Асман» рестораны"
+            "Бишкек ш., 7-Апрель көчөсү, 4/1<br>«Асман» рестораны"
     }
 };
 
@@ -185,10 +185,10 @@ function openLetter() {
         secondSection.classList.add("active");
 
         initScrollAnimations();
-    }, 1700);
+    }, 00);
 }
 
-const weddingDate = new Date("2026-07-18T17:00:00").getTime();
+const weddingDate = new Date("2026-07-18T16:00:00").getTime();
 
 function initScrollAnimations() {
     const items = document.querySelectorAll(".reveal-item");
