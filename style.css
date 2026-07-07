@@ -992,6 +992,8 @@ body.lang-ky .item-5{
     padding: 40px 28px 90px;
     color: var(--primary);
     text-align: left;
+    position: relative;
+    z-index: 20;
 }
 
 body.lang-ru .rsvp-title-image {
