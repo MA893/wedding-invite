@@ -18,7 +18,9 @@ const texts = {
         dates: ["13", "14", "15", "16", "17", "18", "19"],
         addressTitle: "./assets/adress-ru.svg",
         address:
-            "г. Бишкек, ул. 7 Апреля, 174/1<br>Ресторан «Асман»"
+            "г. Бишкек, ул. 7 Апреля, 174/1<br>Ресторан «Асман»",
+        thanksTitle: "С уважением,",
+        thanksNames: "Арстанбек &<br>Жумагуль"
     },
 
     ky: {
@@ -36,11 +38,29 @@ const texts = {
         dates: ["13", "14", "15", "16", "17", "18", "19"],
         addressTitle: "./assets/adress.png",
         address:
-            "Бишкек ш., 7-Апрель көчөсү, 4/1<br>«Асман» рестораны"
+            "Бишкек ш., 7-Апрель көчөсү, 174/1<br>«Асман» рестораны",
+        thanksTitle: "Урматтоо менен,",
+        thanksNames: "Арстанбек &<br>Жумагуль"
     }
 };
 
+window.addEventListener("beforeunload", () => {
+    window.scrollTo(0, 0);
+});
+
+window.addEventListener("beforeunload", () => {
+    window.scrollTo(0, 0);
+});
+
 window.addEventListener("load", () => {
+    history.scrollRestoration = "manual";
+
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto"
+    });
+
     const lang = localStorage.getItem("lang");
 
     if (lang) {
@@ -89,6 +109,12 @@ function applyLanguage(lang) {
 
         return `<span>${date}</span>`;
     }).join("");
+
+    document.getElementById("thanksTitle").innerHTML =
+        current.thanksTitle;
+
+    document.getElementById("thanksNames").innerHTML =
+        current.thanksNames;
 
     sealImage.src = current.seal;
     titleImage.src = current.title;
@@ -181,14 +207,16 @@ function openLetter() {
         letterScreen.style.display = "none";
         mainContent.classList.add("show");
 
+        localStorage.setItem("letterOpened", "true");
+
         const secondSection = document.getElementById("secondSection");
         secondSection.classList.add("active");
 
         initScrollAnimations();
-    }, 00);
+    }, 1700);
 }
 
-const weddingDate = new Date("2026-07-18T16:00:00").getTime();
+const weddingDate = new Date("2026-07-18T17:00:00").getTime();
 
 function initScrollAnimations() {
     const items = document.querySelectorAll(".reveal-item");
@@ -243,10 +271,13 @@ const heartPath = [
     { top: 110, left: 28 },
     { top: 130, left: 45 },
     { top: 150, left: 58 },
-    { top: 170, left: 65 },
+    { top: 170, left: 63 },
 
     { top: 195, left: 62 },
-    { top: 220, left: 55 },
+    { top: 206, left: 61 },
+    { top: 215, left: 58 },
+    { top: 220, left: 56 },
+    // { top: 230, left: 56 },
     { top: 245, left: 48 },
     { top: 275, left: 43 },
     { top: 310, left: 40 },
@@ -291,7 +322,7 @@ function updateHeartByScroll() {
     const windowHeight = window.innerHeight;
 
     // чем больше slowZone — тем медленнее движется сердце
-    const slowZone = 0.2;
+    const slowZone = 0.8;
 
     const start = windowHeight * 0.9;
     const end = -rect.height * slowZone;
