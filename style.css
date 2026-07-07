@@ -1,5 +1,5 @@
 :root {
-    --primary: #650009;
+    --primary: #7f1121;
     --primary-dark: #6f2e40;
     --gold: #d9bd75;
     --white: #f8f1ec;
@@ -785,9 +785,9 @@ body.lang-ky .countdown {
     line-height: 1;
 }
 
-.reveal.active .program-block {
-    transition-delay: 1.2s;
-}
+/*.reveal.active .program-block {*/
+/*    transition-delay: 1.2s;*/
+/*}*/
 
 .program-block {
     position: relative;
@@ -943,7 +943,12 @@ body.lang-ky .item-5{
 
     20% {
         top: 170px;
-        left: 65%;
+        left: 56%;
+    }
+
+    30% {
+        top: 230px;
+        left: 48%;
     }
 
     40% {
@@ -1296,4 +1301,59 @@ body.lang-ru .rsvp-form {
 .reveal-item.show {
     opacity: 1;
     transform: translateY(0);
+}
+
+.thanks-block{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height: 500px;
+}
+
+.thanks-envelope{
+    top: -70px;
+    position:relative;
+    width:420px;
+}
+
+.thanks-envelope-image{
+    width:420px;
+    display:block;
+}
+
+.thanks-content{
+    position:absolute;
+
+    top:265px;
+    left:53%;
+
+    width:250px;
+    height:165px;
+
+    transform:translateX(-50%);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    color:#5F0000;
+
+    pointer-events:none;
+}
+
+#thanksTitle{
+    margin:0 0 12px;
+    font-size:26px;
+    font-weight:500;
+}
+
+#thanksNames{
+    margin:0;
+
+    font-family:'EB Garamond', serif;
+    font-size:30px;
+    line-height:1.35;
 }
